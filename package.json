@@ -1,7 +1,7 @@
 {
-  "name": "reactium-core-project",
-  "version": "6.1.1",
-  "description": "A framework for creating React + Redux apps using the domain driven design (DDD) paradigm.",
+  "name": "Reactium-GraphQL-Plugin",
+  "version": "0.0.1",
+  "description": "Apollo GraphQL Plugin for Reactium",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.mjs",
