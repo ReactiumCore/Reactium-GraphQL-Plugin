@@ -1,54 +1,33 @@
-![](https://image.ibb.co/ee2WaG/atomic_reactor.png)
+# Reactium GraphQL Plugin
 
-# Reactium
+Provides an Apollo GraphQL client on Reactium.GraphQL singleton in Reactium project.
 
-An opinionated framework for creating React + Redux apps.
+## Install
 
-[Reactium documentation](https://docs.reactium.io/)
+`npx reactium install @reactium/graphql`
 
-## Quick Start
+## Configuration
 
-To run in development mode from your project directory for local development:
+- **GraphQL Playground** - Enabled by default in local development, disabled by default in production environment. To set the playground URL **(Defaults to `/playground`)**, set the environment variable `GRAPHQL_PLAYGROUND_URL`
+  
+  ```bash
+  export GRAPHQL_PLAYGROUND_URL="/my-playground"
+  ```
 
-```
-$ npx reactium init
-$ npm run local
-```
+  To enable playground in production, set `GRAPHQL_PLAYGROUND_ENABLED=on`
+- **GraphQL Server URL** - To set the GraphQL server URL (defaults to localhost:4000/graphql):
+    ```bash
+    export GRAPHQL_URL="https://my.graphql.host/graphql"
+    ```
+- **GraphQL Proxy** - Enabled by default, Reactium will proxy `/graphql` to the GraphQL Server URL (See above). If this behavior is disabled, the Apollo Client will use your server URL directly (You will be responsible for setting up your GraphQL Server for [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)). To disable proxy behavior:
+    
+    ```bash
+    export GRAPHQL_PROXY_ENABLED="off"
+    ```
 
-## The Approach
+    The default proxy URL (provided by http-proxy middleware) for your GraphQL api is `/graphql`. To change this:
 
-Reactium follows Domain Drive Design (DDD) and aims to ease the creation of complex applications by connecting the related pieces of the software into an ever-evolving model.
-
-DDD focuses on three core principles:
-
--   Focus on the core domain and domain logic.
--   Base complex designs on models of the domain.
--   Constantly collaborate with domain experts, in order to improve the application model and resolve any emerging domain-related issues.
-
-### Advantages of Domain Driven Design
-
--   **Eases Communication:** With an early emphasis on establishing a common and ubiquitous language related to the domain model of the project, teams will often find communication throughout the entire development life cycle to be much easier. Typically, DDD will require less technical jargon when discussing aspects of the application, since the ubiquitous language established early on will likely define simpler terms to refer to those more technical aspects.
--   **Improves Flexibility:** Since DDD is based around modularity, nearly everything within the domain model will be based on an object and will, therefore, be quite encapsulated. This allows for various components, or even the entire system as a whole, to be altered and improved on a regular, continuous basis.
--   **Emphasizes Domain Over Interface:** Since DDD is the practice of building around the concepts of domain and what the domain experts within the project advise, DDD will often produce applications that are accurately suited for and representative of the domain at hand, as opposed to those applications which emphasize the UI/UX first and foremost. While an obvious balance is required, the focus on domain means that a DDD approach can produce a product that resonates well with the audience associated with that domain.
--   **Encourages Iterative Practices:** DDD practices strongly rely on constant iteration and continuous integration in order to build a malleable project that can adjust itself when necessary. Some organizations may have trouble with these practices, particularly if their past experience is largely tied to less-flexible development models, such as the waterfall model or the like.
-
-## Styling
-
-Reactium takes the approach of **NOT** bundling CSS in JS.
-
-There are a many reasons why, but the most important ones to us are:
-
--   Traditional styling allows you to declare which style wins very clearly and easily.
--   Bundling the styles as a separate file allow for easy holistic replacement.
--   Easy delivery of the styles to a CDN or other resource management tool.
--   Faster Webpack compilation.
-
-## Reactium Features
-
--   **Fast Local Development Workflow:** Javascript tooling is hard, laborious, and annoying. We've spent a lot of time working through dozens of _"what if..."_ scenarios to deliver a minimal pain dev workflow!
--   **Built-in Design System:** No need to have a separate design system like Pattern Lab or Storybook. [Learn more](https://github.com/Atomic-Reactor/Reactium/blob/master/markdown/design-system.md).
--   **Robust Command Line Interface:** Reactium heavily relies on boiler-plated code to normalize and ease the dev workflow. Creating a component or a design system element can be done with the stroke of a few keys. No need to memorize all the commands either, you can use `--flags` or follow prompts. You can even customize the CLI by replacing or creating your own commands. [Learn more](https://www.npmjs.com/package/@atomic-reactor/cli).
--   **Easy Deployment:** Reactium creates a Node server for both front-end and server side rendering making it easy to deploy to the host of your choice. We even have a docker setup included for you dev-opers.
--   **Single Page App or Isolated Component Development:** Build anything from a full website to a single component and package for distribution.
--   **Built-in React Router Support**: Build routed websites in a single application with no additional setup. Learn more about [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
--   **Plugin Architecture**: Registered components, rendering Zone components, and run-time extensibility!
+    ```bash
+    export GRAPHQL_PROXY_URL="/my-graphql-api"
+    ```
+    > Note: Changing this proxy URL will also change the default GraphQL Server URL (unless you have set it with `GRAPHQL_URL`)
