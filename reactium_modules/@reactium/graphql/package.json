@@ -1,4 +1,10 @@
 {
+  "actinium": {
+    "version": "3.6.6"
+  },
+  "reactium": {
+    "version": "6.1.1"
+  },
   "name": "@reactium/graphql",
   "version": "0.0.1",
   "description": "GraphQL Support for Reactium",
