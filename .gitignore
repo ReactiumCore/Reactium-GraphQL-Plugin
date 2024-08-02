@@ -35,7 +35,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-reactium_modules/
+reactium_modules/*
 
 # Typescript v1 declaration files
 typings/
@@ -93,3 +93,7 @@ src/app/server/webpack-manifest.json
 # Editor configs
 *.code-workspace
 *.vscode
+
+# Allow Git Tracking for these directories
+!reactium_modules/@reactium
+!reactium_modules/@reactium/graphql

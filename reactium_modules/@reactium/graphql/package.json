@@ -1,0 +1,17 @@
+{
+  "name": "@reactium/graphql",
+  "version": "0.0.1",
+  "description": "GraphQL Support for Reactium",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Dillick <john@dillick.us>",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-playground-middleware-express": "^1.7.23"
+  },
+  "devDependencies": {
+    "@apollo/client": "^3.11.2"
+  }
+}
