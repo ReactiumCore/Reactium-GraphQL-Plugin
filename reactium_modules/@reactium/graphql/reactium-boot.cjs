@@ -36,7 +36,7 @@ ReactiumBoot.Hook.registerSync(
         });
     },
     Enums.priority.highest,
-    'REACTIUM-CORE-SDK-API-GLOBALS',
+    'REACTIUM-CORE-SDK-GRAPHQL-GLOBALS',
 );
 
 if (graphqlAPI && proxyEnabled && graphqlProxyPath) {
