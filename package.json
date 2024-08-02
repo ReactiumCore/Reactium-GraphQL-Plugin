@@ -56,8 +56,7 @@
   },
   "workspaces": [
     "reactium_modules/*",
-    "reactium_modules/@*/*",
-    "@reactium/graphql"
+    "reactium_modules/@*/*"
   ],
   "husky": {
     "hooks": {
