@@ -4,7 +4,47 @@ Provides an Apollo GraphQL client on Reactium.GraphQL singleton in Reactium proj
 
 ## Install
 
-`npx reactium install @reactium/graphql`
+```sh
+npx reactium install @reactium/graphql
+```
+
+## Usage
+
+See [Apollo Client (React)](https://www.apollographql.com/docs/react) documentation for full details.
+
+This plugin already sets up the Apollo client as a context provider for the Reactium application, so you can begin using the `gql` with React hooks immediately.
+
+```jsx
+import { gql, useQuery } from '@apollo/client';
+import React from 'react';
+
+const GET_USERS = gql`
+    query GetUsers {
+        users {
+            id
+            name
+            email
+        }
+    }
+`;
+
+export const UsersList = () => {
+    const { loading, error, data } = useQuery(GET_USERS);
+    if (loading) return <div>Loading...</div>;
+    else if (error) return <div>Error: {error}</div>;
+    const { users } = data;
+
+    return (
+        <ul>
+            {users.map(({ id, name, email }) => (
+                <li key={id}>
+                    {name}: {email}
+                </li>
+            ))}
+        </ul>
+    );
+};
+```
 
 ## Configuration
 

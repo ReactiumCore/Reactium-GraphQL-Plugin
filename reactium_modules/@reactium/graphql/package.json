@@ -6,7 +6,7 @@
     "version": "6.1.1"
   },
   "name": "@reactium/graphql",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "GraphQL Support for Reactium",
   "main": "index.js",
   "scripts": {

@@ -11,11 +11,6 @@ const GET_USERS = gql`
     }
 `;
 
-/**
- * -----------------------------------------------------------------------------
- * Component: ApolloTest
- * -----------------------------------------------------------------------------
- */
 export const ApolloTest = () => {
     const { loading, error, data } = useQuery(GET_USERS);
     if (loading) return <div>Loading...</div>;
