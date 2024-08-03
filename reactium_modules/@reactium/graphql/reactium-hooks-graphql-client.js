@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import Reactium, { Hook, Enums } from 'reactium-core/sdk';
 
 Hook.register(
@@ -43,3 +43,10 @@ Hook.register(
     Enums.highest,
     'REACTIUM-CORE-SDK-GRAPHQL',
 );
+
+Hook.register('app-context-provider', async () => {
+    Reactium.AppContext.register('ApolloProvider', {
+        provider: ApolloProvider,
+        client: Reactium.GraphQL,
+    });
+});
