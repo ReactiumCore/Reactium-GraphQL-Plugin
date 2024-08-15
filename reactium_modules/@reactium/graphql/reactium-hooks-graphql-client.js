@@ -30,10 +30,7 @@ Hook.register(
                     '@atomic-reactor/reactium-api module is required',
                 );
             Reactium.API.register('GraphQL', {
-                api: new ApolloClient({
-                    uri: window.graphqlAPI || 'http://localhost:4000/graphql',
-                    ...config,
-                }),
+                api: new ApolloClient(config),
                 config,
             });
         } catch (err) {

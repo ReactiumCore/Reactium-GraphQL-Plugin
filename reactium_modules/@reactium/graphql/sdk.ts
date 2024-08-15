@@ -23,6 +23,32 @@ import {
  * @return {ReactiumSyncState<QueryResult<TData,TVariables>>} The sync state object.
  * @see {@link [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery)} for more information on the useLazyQuery hook from which this hook is derived.
  * @see {@link [ReactiumSyncState](https://reactiumcore.github.io/reactium-sdk-core/classes/ReactiumSyncState.html)} to understand the underlying synchronized state object.
+ * @example
+ * import { useSyncGQLQuery } from '@reactium/graphql';
+ * import { gql } from '@apollo/client';
+ *
+ * const MY_QUERY = gql`
+ *    query MyQuery($id: ID!) {
+ *       myQuery {
+ *         id
+ *        name
+ *      }
+ *   }
+ * `;
+ *
+ * const MyComponent = () => {
+ *   const state = useSyncGQLQuery(MY_QUERY, { variables: { id: '123' } });
+ *   const { data, loading, error } = state.get();
+ *
+ *  if (loading) return <div>Loading...</div>;
+ *  return (
+ *    <div>
+ *      {error && <div>Error: {error.message}</div>}
+ *      {data && <div>{data.myQuery.name}</div>}
+ *      <button onClick={() => state.refresh()}>Refresh</button>
+ *      <button onClick={() => state.refresh({ id: '456'})}>Load Id 456</button>
+ *    </div>
+ * );
  */
 export const useSyncGQLQuery = <
     TData = any,

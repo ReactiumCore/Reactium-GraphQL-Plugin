@@ -28,9 +28,8 @@ export const Dashboard = () => {
     const UserList = useHookComponent('UserList');
 
     const handle = useSyncGQLQuery(LOAD_DASHBOARD_DATA, {
-        variables: { nums: [1, 2, 3, 5] },
+        variables: { nums: [0, 1] },
     });
-    window.handle = handle;
 
     return (
         <Container fluid as='main'>
