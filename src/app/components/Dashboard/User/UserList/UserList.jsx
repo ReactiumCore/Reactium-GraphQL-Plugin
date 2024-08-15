@@ -5,7 +5,6 @@ import Table from 'react-bootstrap/Table';
 import Placeholder from 'react-bootstrap/Placeholder';
 
 export const UserList = ({ loading = true, error, users = [] }) => {
-    console.log({ loading, error, users });
     return (
         <Accordion defaultActiveKey='0' className='users'>
             <Accordion.Item eventKey='0'>

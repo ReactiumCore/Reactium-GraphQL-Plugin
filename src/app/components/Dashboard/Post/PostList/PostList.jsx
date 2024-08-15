@@ -5,7 +5,6 @@ import Table from 'react-bootstrap/Table';
 import Placeholder from 'react-bootstrap/Placeholder';
 
 export const PostList = ({ loading = true, error, posts = [] }) => {
-    console.log({ loading, error, posts });
     return (
         <Accordion defaultActiveKey='0' className='posts'>
             <Accordion.Item eventKey='0'>

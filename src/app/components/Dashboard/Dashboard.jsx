@@ -1,23 +1,25 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql, useLazyQuery } from '@apollo/client';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import op from 'object-path';
-import { useEffect } from 'react';
 import { useHookComponent } from 'reactium-core/sdk';
+import { useSyncGQLQuery } from '@reactium/graphql';
 
-const GET_USERS = gql`
-    query {
+const LOAD_DASHBOARD_DATA = gql`
+    query LoadDashboardDat($nums: [Int!]!) {
         users {
             id
             name
             email
         }
+
         posts {
             id
             title
             body
         }
+
+        add(nums: $nums)
     }
 `;
 
@@ -25,26 +27,20 @@ export const Dashboard = () => {
     const PostList = useHookComponent('PostList');
     const UserList = useHookComponent('UserList');
 
-    const response = useQuery(GET_USERS);
-    useEffect(() => {
-        if (response.observable) {
-            response.observable.subscribe({
-                next: ({ data }) => {
-                    console.log({ data });
-                },
-            });
-        }
-    }, [response.observable]);
+    const handle = useSyncGQLQuery(LOAD_DASHBOARD_DATA, {
+        variables: { nums: [1, 2, 3, 5] },
+    });
+    window.handle = handle;
 
-    console.log({ response });
     return (
         <Container fluid as='main'>
-            <h1>Dashboard</h1>
+            <h1>Dashboard {handle.get('data.add')}</h1>
             <Row>
                 <Col>
                     <UserList
-                        {...response}
-                        users={op.get(response, 'data.users', [])}
+                        loading={handle.get('loading', false)}
+                        error={handle.get('error')}
+                        users={handle.get('data.users', [])}
                     />
                 </Col>
             </Row>
@@ -52,8 +48,9 @@ export const Dashboard = () => {
             <Row>
                 <Col>
                     <PostList
-                        {...response}
-                        posts={op.get(response, 'data.posts', [])}
+                        loading={handle.get('loading', false)}
+                        error={handle.get('error')}
+                        posts={handle.get('data.posts', [])}
                     />
                 </Col>
             </Row>
