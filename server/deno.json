@@ -1,0 +1,36 @@
+{
+  "unstable": [
+    "bare-node-builtins",
+    "byonm",
+    "unsafe-proto",
+    "webgpu",
+    "broadcast-channel",
+    "worker-options",
+    "cron",
+    "kv",
+    "ffi",
+    "fs",
+    "net"
+  ],
+  "imports": {
+    "/": "./",
+    "./": "./",
+    "archisaurus.ts": "https://deno.land/x/archisaurus@v0.0.1/mod.ts",
+    "tilia/": "https://deno.land/x/tilia@0.1.2/src/",
+    "oak.ts": "https://deno.land/x/oak@v10.0.0/mod.ts",
+    "oak_graphql.ts": "https://deno.land/x/oak_graphql/mod.ts",
+    "mongoose.ts": "https://deno.land/x/mongoose@8.5.2/mod.ts",
+    "reactium-core-sdk.ts": "https://esm.sh/@atomic-reactor/reactium-sdk-core@2.2.0/core?bundle-deps",
+    "underscore.ts": "https://esm.sh/underscore@1.12.1",
+    "mongo.ts": "https://deno.land/x/mongo@v0.33.0/mod.ts",
+    "dotenv.ts": "https://deno.land/x/dot_env@0.2.0/mod.ts"
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"],
+      "rules": {
+        "no-explicit-any": false
+      }
+    }
+  }
+}
