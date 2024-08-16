@@ -1,9 +1,9 @@
-import { gql, useLazyQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useHookComponent } from 'reactium-core/sdk';
-import { useSyncGQLQuery } from '@reactium/graphql';
+import { useSyncQuery } from '@reactium/graphql';
 
 const LOAD_DASHBOARD_DATA = gql`
     query LoadDashboardDat($nums: [Int!]!) {
@@ -27,7 +27,7 @@ export const Dashboard = () => {
     const PostList = useHookComponent('PostList');
     const UserList = useHookComponent('UserList');
 
-    const handle = useSyncGQLQuery(LOAD_DASHBOARD_DATA, {
+    const handle = useSyncQuery(LOAD_DASHBOARD_DATA, {
         variables: { nums: [0, 1] },
     });
 

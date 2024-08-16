@@ -1,692 +1,156 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Loading...</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link href="vendor/bootstrap.min.css" rel="stylesheet" media="screen">
-  <link href="vendor/prism.css" rel="stylesheet" />
-  <link href="css/style.css" rel="stylesheet" media="screen, print">
-  <link href="img/favicon.ico" rel="icon" type="image/x-icon">
-  <script src="vendor/polyfill.js"></script>
-</head>
-<body class="container-fluid">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Reactium-GraphQL-Plugin</title><meta name="description" content="Documentation for Reactium-GraphQL-Plugin"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">Reactium-GraphQL-Plugin</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h2>Reactium-GraphQL-Plugin</h2></div><div class="tsd-panel tsd-typography"><a id="md:reactium-graphql-plugin" class="tsd-anchor"></a><h1 class="tsd-anchor-link">Reactium GraphQL Plugin<a href="#md:reactium-graphql-plugin" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p>Provides an Apollo GraphQL client on Reactium.GraphQL singleton in Reactium project.</p>
+<a id="md:about-this-repository" class="tsd-anchor"></a><h2 class="tsd-anchor-link">About this Repository<a href="#md:about-this-repository" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>This repository is a mono-style repo (for publishing the @reactium/graphql Reactium module to the Reactium registry), but it's also a Reactium project itself, complete with an example deno GraphQL server and a Reactium example front-end that uses the @reactium/graphql module.</p>
+<p>See below for if you want to play around with this repository in your local environment.</p>
+<a id="md:install" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Install<a href="#md:install" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>To install this module in your own Reactium project:</p>
+<pre><code class="sh"><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">reactium</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">@reactium/graphql</span>
+</code><button type="button">Copy</button></pre>
 
-<script id="template-sidenav" type="text/x-handlebars-template">
-<nav id="scrollingNav">
-  <div class="sidenav-search">
-    <input class="form-control search" type="text" placeholder="{{__ "Filter..."}}">
-    <span class="search-reset">x</span>
-  </div>
-  <ul class="sidenav nav nav-list list">
-  {{#each nav}}
-    {{#if title}}
-      {{#if isHeader}}
-        {{#if isFixed}}
-          <li class="nav-fixed nav-header navbar-btn nav-list-item" data-group="{{group}}"><a href="#api-{{group}}" data-name="show-api-{{group}}" class="show-api api-{{group}}-init">{{underscoreToSpace title}}</a></li>
-        {{else}}
-          <li class="nav-header nav-list-item" data-group="{{group}}"><a href="#api-{{group}}" data-group="show-api-{{group}}" class="show-group api-{{group}}-init">{{underscoreToSpace title}}</a></li>
-        {{/if}}
-      {{else}}
-        <li class="{{#if hidden}}hide {{/if}}" data-group="{{group}}" data-name="{{name}}" data-version="{{version}}">
-          <a href="#api-{{group}}-{{name}}" title="{{url}}" data-group="show-api-{{group}}" data-name="show-api-{{group}}-{{name}}" class="nav-list-item show-api api-{{group}}-{{name}}-init">{{title}}<div class="nav-list-url-item hide">{{url}}</div></a>
-        </li>
-      {{/if}}
-    {{/if}}
-  {{/each}}
-  </ul>
-</nav>
-</script>
+<a id="md:usage" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Usage<a href="#md:usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>See <a href="https://www.apollographql.com/docs/react">Apollo Client (React)</a> documentation for full details.</p>
+<p>This plugin already sets up the Apollo client as a context provider for the Reactium application, so you can begin using the <code>gql</code> with React hooks immediately.</p>
+<pre><code class="jsx">import { gql, useQuery } from '@apollo/client';
+import React from 'react';
 
-<script id="template-project" type="text/x-handlebars-template">
-  <div class="pull-left">
-    <h1>{{name}}</h1>
-    {{#if description}}<h2>{{{nl2br description}}}</h2>{{/if}}
-  </div>
-  <div class="pull-right">
-    {{#if template.withCompare}}
-    <div class="btn-group">
-      <button id="version" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown">
-        <strong>{{version}}</strong>&nbsp;<span class="caret"></span>
-      </button>
-      <ul id="versions" class="dropdown-menu open-left">
-        <li><a id="compareAllWithPredecessor" href="#">{{__ "Compare all with predecessor"}}</a></li>
-        <li class="divider"></li>
-        <li class="disabled"><a href="#">{{__ "show up to version:"}}</a></li>
-      {{#each versions}}
-        <li class="version"><a href="#">{{this}}</a></li>
-      {{/each}}
-      </ul>
-    </div>
-    {{else}}
-    <div id="version" class="well well-sm">
-      <strong>{{version}}</strong>
-    </div>
-    {{/if}}
-  </div>
-  <div class="clearfix"></div>
-</script>
+const GET_USERS = gql`
+    query GetUsers {
+        users {
+            id
+            name
+            email
+        }
+    }
+`;
 
-<script id="template-header" type="text/x-handlebars-template">
-  {{#if content}}
-    <div id="api-_" class="show-api-article show-api-_-article">{{{content}}}</div>
-  {{/if}}
-</script>
+export const UsersList = () => {
+    const { loading, error, data } = useQuery(GET_USERS);
+    if (loading) return <div>Loading...</div>;
+    else if (error) return <div>Error: {error}</div>;
+    const { users } = data;
 
-<script id="template-footer" type="text/x-handlebars-template">
-  {{#if content}}
-    <div id="api-_footer" class="show-api-article show-api-_-article">{{{content}}}</div>
-  {{/if}}
-</script>
-
-<script id="template-generator" type="text/x-handlebars-template">
-  {{#if template.withGenerator}}
-    {{#if generator}}
-      <div class="content">
-        {{__ "Generated with"}} <a href="{{{generator.url}}}">{{{generator.name}}}</a> {{{generator.version}}} - {{{generator.time}}}
-      </div>
-    {{/if}}
-  {{/if}}
-</script>
-
-<script id="template-sections" type="text/x-handlebars-template">
-  <section id="api-{{group}}" class="show-api-group show-api-{{group}}-group {{#if aloneDisplay}} hide{{/if}}">
-    <h1>{{underscoreToSpace title}}</h1>
-    {{#if description}}
-      <p>{{{nl2br description}}}</p>
-    {{/if}}
-    {{#each articles}}
-      <div id="api-{{group}}-{{name}}" class="show-api-article show-api-{{group}}-article show-api-{{group}}-{{name}}-article {{#if aloneDisplay}} hide{{/if}}">
-        {{{article}}}
-      </div>
-    {{/each}}
-  </section>
-</script>
-
-<script id="template-article" type="text/x-handlebars-template">
-  <article id="api-{{article.group}}-{{article.name}}-{{article.version}}" {{#if hidden}}class="hide"{{/if}} data-group="{{article.group}}" data-name="{{article.name}}" data-version="{{article.version}}">
-    <div class="pull-left">
-      <h1>{{underscoreToSpace article.groupTitle}}{{#if article.title}} - {{article.title}}{{/if}}</h1>
-    </div>
-    {{#if template.withCompare}}
-    <div class="pull-right">
-      <div class="btn-group">
-        <button class="version btn btn-default dropdown-toggle" data-toggle="dropdown">
-          <strong>{{article.version}}</strong>&nbsp;<span class="caret"></span>
-        </button>
-        <ul class="versions dropdown-menu open-left">
-          <li class="disabled"><a href="#">{{__ "compare changes to:"}}</a></li>
-        {{#each versions}}
-          <li class="version"><a href="#">{{this}}</a></li>
-        {{/each}}
+    return (
+        <ul>
+            {users.map(({ id, name, email }) => (
+                <li key={id}>
+                    {name}: {email}
+                </li>
+            ))}
         </ul>
-      </div>
-    </div>
-    {{/if}}
-    <div class="clearfix"></div>
+    );
+};
+</code><button type="button">Copy</button></pre>
 
-    {{#if article.author}}<h4 class="muted">Authored by: {{article.author}}</h4>{{/if}}
+<a id="md:reactium-specific-hooks" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Reactium Specific Hooks<a href="#md:reactium-specific-hooks" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>When this module is installed in a Reactium project, it exposes it's own React hooks in the @reactium/graphql workspace.</p>
+<ul>
+<li>
+<p><strong>useSyncQuery</strong>: Wraps the Apollo GraphQL query hook, but makes it into a <a href="https://reactiumcore.github.io/reactium-sdk-core/classes/ReactiumSyncState.html">ReactiumSyncState object</a> for easier memory state management. For those used to the Reactium improved <a href="https://reactiumcore.github.io/reactium-sdk-core/functions/useSyncState.html">useSyncState hook</a> for improved component state management, with imperative state updates, as well as EventTarget extensibility and observability.</p>
+<pre><code class="jsx">  import { gql } from '@apollo/client';
+  import Container from 'react-bootstrap/Container';
+  import Row from 'react-bootstrap/Row';
+  import Col from 'react-bootstrap/Col';
+  import { useHookComponent } from 'reactium-core/sdk';
+  import { useSyncQuery } from '@reactium/graphql';
 
-    {{#if article.deprecated}}
-      <p class="deprecated"><span>{{__ "DEPRECATED"}}</span>
-        {{{markdown article.deprecated.content}}}
-      </p>
-    {{/if}}
+  const LOAD_DASHBOARD_DATA = gql`
+      query LoadDashboardDat($nums: [Int!]!) {
+          users {
+              id
+              name
+              email
+          }
 
-    {{#if article.description}}
-      <p>{{{nl2br article.description}}}</p>
-    {{/if}}
-    <span class="type type__{{toLowerCase article.type}}">{{toLowerCase article.type}}</span>
-    <pre data-type="{{toLowerCase article.type}}"><code class="language-http">{{article.url}}</code></pre>
+          posts {
+              id
+              title
+              body
+          }
 
-    {{#if article.permission}}
-      <p>
-        {{__ "Permission:"}}
-        {{#each article.permission}}
-          {{name}}
-          {{#if title}}
-          <button type="button" class="btn btn-info btn-xs" data-title="{{title}}" data-content="{{nl2br description}}" data-html="true" data-toggle="popover" data-placement="right" data-trigger="hover">
-              <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-          </button>
-          {{/if}}
-        {{/each}}
-      </p>
-    {{/if}}
+          add(nums: $nums)
+      }
+  `;
 
-    {{!-- CODE EXAMPLES IN TABS --}}
-    {{#if_gt article.examples.length compare=0}}
-      <ul class="nav nav-tabs nav-tabs-examples">
-        {{#each article.examples}}
-          <li{{#if_eq @index compare=0}} class="active"{{/if_eq}}>
-            <a href="#examples-{{../id}}-{{@index}}">{{title}}</a>
-          </li>
-        {{/each}}
-      </ul>
+  export const Dashboard = () => {
+      // Get registered components
+      const PostList = useHookComponent('PostList');
+      const UserList = useHookComponent('UserList');
 
-      <div class="tab-content">
-      {{#each article.examples}}
-        <div class="tab-pane{{#if_eq @index compare=0}} active{{/if_eq}}" id="examples-{{../id}}-{{@index}}">
-          <pre data-type="{{type}}"><code class="language-{{type}}">{{content}}</code></pre>
-        </div>
-      {{/each}}
-      </div>
-    {{/if_gt}}
+      const handle = useSyncQuery(LOAD_DASHBOARD_DATA, {
+          variables: { nums: [0, 1] },
+      });
 
-    {{subTemplate "article-param-block" params=article.header _hasType=_hasTypeInHeaderFields section="header"}}
-    {{subTemplate "article-param-block" params=article.parameter _hasType=_hasTypeInParameterFields section="parameter"}}
-    {{subTemplate "article-param-block" params=article.success _hasType=_hasTypeInSuccessFields section="success"}}
-    {{subTemplate "article-param-block" params=article.error _col1="Name" _hasType=_hasTypeInErrorFields section="error"}}
+      return (
+          <Container fluid as='main'>
+              <h1>Dashboard {handle.get('data.add')}</h1>
+              <Row>
+                  <Col>
+                      <UserList
+                          loading={handle.get('loading', false)}
+                          error={handle.get('error')}
+                          users={handle.get('data.users', [])}
+                      />
+                  </Col>
+              </Row>
 
-    {{subTemplate "article-sample-request" article=article id=id}}
-  </article>
-</script>
+              <Row>
+                  <Col>
+                      <PostList
+                          loading={handle.get('loading', false)}
+                          error={handle.get('error')}
+                          posts={handle.get('data.posts', [])}
+                      />
+                  </Col>
+              </Row>
+          </Container>
+      );
+  };
 
-<script id="template-article-param-block" type="text/x-handlebars-template">
-  {{#if params}}
-    {{#each params.fields}}
-      <h2>{{__ @key}}</h2>
-      <table>
-        <thead>
-          <tr>
-          <th style="width: 30%">{{#if ../_col1}}{{__ ../_col1}}{{else}}{{__ "Field"}}{{/if}}</th>
-            {{#if ../_hasType}}<th style="width: 10%">{{__ "Type"}}</th>{{/if}}
-            <th style="width: {{#if ../_hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
-          </tr>
-        </thead>
-        <tbody>
-        {{#each this}}
-          <tr>
-            <td class="code">{{{splitFill field "." "&nbsp;&nbsp;"}}}{{#if optional}} <span class="label label-optional">{{__ "optional"}}</span>{{/if}}</td>
-            {{#if ../../_hasType}}
-              <td>
-                {{{type}}}
-              </td>
-            {{/if}}
-            <td>
-            {{{nl2br description}}}
-            {{#if defaultValue}}<p class="default-value">{{__ "Default value:"}} <code>{{{defaultValue}}}</code></p>{{/if}}
-            {{#if size}}<p class="type-size">{{__ "Size range:"}} <code>{{{size}}}</code></p>{{/if}}
-            {{#if allowedValues}}<p class="type-size">{{__ "Allowed values:"}}
-              {{#each allowedValues}}
-                <code>{{{this}}}</code>{{#unless @last}}, {{/unless}}
-              {{/each}}
-              </p>
-            {{/if}}
-            </td>
-          </tr>
-        {{/each}}
-        </tbody>
-      </table>
-    {{/each}}
-    {{#if_gt params.examples.length compare=0}}
-      <ul class="nav nav-tabs nav-tabs-examples">
-      {{#each params.examples}}
-        <li{{#if_eq @index compare=0}} class="active"{{/if_eq}}>
-          <a href="#{{../section}}-examples-{{../id}}-{{@index}}">{{title}}</a>
-        </li>
-      {{/each}}
-      </ul>
+  export default Dashboard;
+</code><button type="button">Copy</button></pre>
 
-      <div class="tab-content">
-      {{#each params.examples}}
-        <div class="tab-pane{{#if_eq @index compare=0}} active{{/if_eq}}" id="{{../section}}-examples-{{../id}}-{{@index}}">
-        <pre data-type="{{type}}"><code class="language-{{type}}">{{reformat content type}}</code></pre>
-        </div>
-      {{/each}}
-      </div>
-    {{/if_gt}}
-  {{/if}}
-</script>
+</li>
+</ul>
+<a id="md:configuration" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Configuration<a href="#md:configuration" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>There are a number of environment variables that this module will use in your Reactium project.</p>
+<ul>
+<li>
+<p><strong>GraphQL Playground</strong> - Enabled by default in local development, disabled by default in production environment. To set the playground URL <strong>(Defaults to <code>/playground</code>)</strong>, set the environment variable <code>GRAPHQL_PLAYGROUND_URL</code></p>
+<pre><code class="bash"><span class="hl-3">export</span><span class="hl-1"> </span><span class="hl-4">GRAPHQL_PLAYGROUND_URL</span><span class="hl-1">=</span><span class="hl-2">&quot;/my-playground&quot;</span>
+</code><button type="button">Copy</button></pre>
 
-<script id="template-article-sample-request" type="text/x-handlebars-template">
-    {{#if article.sampleRequest}}
-      <h2>{{__ "Send a Sample Request"}}</h2>
-      <form class="form-horizontal">
-        <fieldset>
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="{{../id}}-sample-request-url"></label>
-              <div class="input-group">
-                <input id="{{../id}}-sample-request-url" type="text" class="form-control sample-request-url" value="{{article.sampleRequest.0.url}}" />
-                <span class="input-group-addon">{{__ "url"}}</span>
-              </div>
-            </div>
+<p>To enable playground in production, set <code>GRAPHQL_PLAYGROUND_ENABLED=on</code></p>
+</li>
+<li>
+<p><strong>GraphQL Server URL</strong> - To set the GraphQL server URL (defaults to localhost:4000/graphql):</p>
+<pre><code class="bash"><span class="hl-3">export</span><span class="hl-1"> </span><span class="hl-4">GRAPHQL_URL</span><span class="hl-1">=</span><span class="hl-2">&quot;https://my.graphql.host/graphql&quot;</span>
+</code><button type="button">Copy</button></pre>
 
-      {{#if article.header}}
-        {{#if article.header.fields}}
-          <h3>{{__ "Headers"}}</h3>
-          {{#each article.header.fields}}
-            <h4><input type="checkbox" data-sample-request-header-group-id="sample-request-header-{{@index}}" name="{{../id}}-sample-request-header" value="{{@index}}" class="sample-request-header sample-request-switch" checked />{{__ @key}}</h4>
-            <div class="{{../id}}-sample-request-header-fields">
-              {{#each this}}
-              <div class="form-group">
-                <label class="col-md-3 control-label" for="sample-request-header-field-{{field}}">{{field}}</label>
-                <div class="input-group">
-                  <input type="text" placeholder="{{field}}" value="{{defaultValue}}" id="sample-request-header-field-{{field}}" class="form-control sample-request-header" data-sample-request-header-name="{{field}}" data-sample-request-header-group="sample-request-header-{{@../index}}">
-                  <span class="input-group-addon">{{{type}}}</span>
-                </div>
-              </div>
-              {{/each}}
-            </div>
-          {{/each}}
-        {{/if}}
-      {{/if}}
+</li>
+<li>
+<p><strong>GraphQL Proxy</strong> - Enabled by default, Reactium will proxy <code>/graphql</code> to the GraphQL Server URL (See above). If this behavior is disabled, the Apollo Client will use your server URL directly (You will be responsible for setting up your GraphQL Server for <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a>). To disable proxy behavior:</p>
+<pre><code class="bash"><span class="hl-3">export</span><span class="hl-1"> </span><span class="hl-4">GRAPHQL_PROXY_ENABLED</span><span class="hl-1">=</span><span class="hl-2">&quot;off&quot;</span>
+</code><button type="button">Copy</button></pre>
 
-      {{#if article.parameter}}
-        {{#if article.parameter.fields}}
-          <h3>{{__ "Parameters"}}</h3>
-          {{#each article.parameter.fields}}
-            <h4><input type="checkbox" data-sample-request-param-group-id="sample-request-param-{{@index}}"  name="{{../id}}-sample-request-param" value="{{@index}}" class="sample-request-param sample-request-switch" checked/>{{__ @key}}
-              <select   name="{{../id}}-sample-header-content-type" class="{{../id}}-sample-request-param-select sample-header-content-type sample-header-content-type-switch">
-                <option value="undefined"  selected>ajax-auto</option>
-                <option value="body-json" >body/json</option>
-                <option value="body-form-data" >body/form-data</option>
-              </select>
-            </h4>
-            <div class="{{../id}}-sample-request-param-body {{../id}}-sample-header-content-type-body hide">
-              <div class="form-group">
-                <div class="input-group">
-                  <textarea id="sample-request-body-json" class="form-control sample-request-body" data-sample-request-body-group="sample-request-param-{{@./index}}" rows="6" style="OVERFLOW: visible" {{#if optional}}data-sample-request-param-optional="true"{{/if}}></textarea>
-                  <div class="input-group-addon">json</div>
-                </div>
-              </div>
-            </div>
-            <div class="{{../id}}-sample-request-param-fields {{../id}}-sample-header-content-type-fields">
-              {{#each this}}
-              <div class="form-group">
-                <label class="col-md-3 control-label" for="sample-request-param-field-{{field}}">{{field}}</label>
-                <div class="input-group">
-                  <input id="sample-request-param-field-{{field}}" type="{{setInputType type}}" placeholder="{{field}}" class="form-control sample-request-param" data-sample-request-param-name="{{field}}" data-sample-request-param-group="sample-request-param-{{@../index}}" {{#if optional}}data-sample-request-param-optional="true"{{/if}}>
-                  <div class="input-group-addon">{{{type}}}</div>
-                </div>
-              </div>
-              {{/each}}
-            </div>
-          {{/each}}
-        {{/if}}
-      {{/if}}
+<p>The default proxy URL (provided by http-proxy middleware) for your GraphQL api is <code>/graphql</code>. To change this:</p>
+<pre><code class="bash"><span class="hl-3">export</span><span class="hl-1"> </span><span class="hl-4">GRAPHQL_PROXY_URL</span><span class="hl-1">=</span><span class="hl-2">&quot;/my-graphql-api&quot;</span>
+</code><button type="button">Copy</button></pre>
 
-          <div class="form-group">
-            <div class="controls pull-right">
-              <button class="btn btn-primary sample-request-send" data-sample-request-type="{{article.type}}">{{__ "Send"}}</button>
-            </div>
-          </div>
-          <div class="form-group sample-request-response" style="display: none;">
-            <h3>
-              {{__ "Response"}}
-              <button class="btn btn-default btn-xs pull-right sample-request-clear">X</button>
-            </h3>
-            <pre data-type="json"><code class="language-json sample-request-response-json"></code></pre>
-          </div>
-        </fieldset>
-      </form>
-    {{/if}}
-</script>
+<blockquote>
+<p>Note: Changing this proxy URL will also change the default GraphQL Server URL (unless you have set it with <code>GRAPHQL_URL</code>)</p>
+</blockquote>
+</li>
+</ul>
+<a id="md:using-this-demo-graphql-server" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Using this demo GraphQL server<a href="#md:using-this-demo-graphql-server" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>This repository has an example deno server that runs a GraphQL server.</p>
+<p>See <code>./GraphQLServer</code> for the deno server. You will need to have <a href="https://docs.deno.com/runtime/manual/">deno installed</a> and configure your local mongo instance credentials, by adding the <code>MONGODB_URI</code> variable to <code>./GraphQLServer/.env</code>:</p>
+<pre><code><span class="hl-5">MONGODB_URI</span><span class="hl-1">=</span><span class="hl-6">mongodb</span><span class="hl-1">:</span><span class="hl-7">//deno:denopwd@localhost:27017/deno</span>
+</code><button>Copy</button></pre>
 
-<script id="template-compare-article" type="text/x-handlebars-template">
-  <article id="api-{{article.group}}-{{article.name}}-{{article.version}}" {{#if hidden}}class="hide"{{/if}} data-group="{{article.group}}" data-name="{{article.name}}" data-version="{{article.version}}" data-compare-version="{{compare.version}}">
-    <div class="pull-left">
-      <h1>{{underscoreToSpace article.group}} - {{{showDiff article.title compare.title}}}</h1>
-    </div>
+<blockquote>
+<p>Example local mongodb URI</p>
+</blockquote>
+<p>I'd also recommend installing <a href="https://deno.land/x/denon@2.5.0/docs/installation.md?source=">denon</a> (like nodemon for deno) for easy startup of the server locally:</p>
+<pre><code class="sh"><span class="hl-0">cd</span><span class="hl-1"> </span><span class="hl-2">./GraphQLServer</span><br/><span class="hl-0">denon</span><span class="hl-1"> </span><span class="hl-2">start</span>
+</code><button type="button">Copy</button></pre>
 
-    <div class="pull-right">
-      <div class="btn-group">
-        <button class="btn btn-success" disabled>
-          <strong>{{article.version}}</strong> {{__ "compared to"}}
-        </button>
-        <button class="version btn btn-danger dropdown-toggle" data-toggle="dropdown">
-          <strong>{{compare.version}}</strong>&nbsp;<span class="caret"></span>
-        </button>
-        <ul class="versions dropdown-menu open-left">
-          <li class="disabled"><a href="#">{{__ "compare changes to:"}}</a></li>
-          <li class="divider"></li>
-        {{#each versions}}
-          <li class="version"><a href="#">{{this}}</a></li>
-        {{/each}}
-        </ul>
-      </div>
-    </div>
-    <div class="clearfix"></div>
+<a id="md:starting-the-ui" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Starting the UI<a href="#md:starting-the-ui" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>This repository includes a Reactium project with a UI that can interact with the included Deno server.</p>
+<p>To start the UI:</p>
+<pre><code class="sh"><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">reactium</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-7"># first time to install dependencies (includes npm dependencies as well)</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">local</span>
+</code><button type="button">Copy</button></pre>
 
-    {{#if article.description}}
-      <p>{{{showDiff article.description compare.description "nl2br"}}}</p>
-    {{else}}
-      {{#if compare.description}}
-      <p>{{{showDiff "" compare.description "nl2br"}}}</p>
-      {{/if}}
-    {{/if}}
-
-    <pre data-type="{{toLowerCase article.type}}"><code class="language-html">{{{showDiff article.url compare.url}}}</code></pre>
-
-    {{subTemplate "article-compare-permission" article=article compare=compare}}
-
-    <ul class="nav nav-tabs nav-tabs-examples">
-    {{#each_compare_title article.examples compare.examples}}
-      {{#if typeSame}}
-        <li{{#if_eq index compare=0}} class="active"{{/if_eq}}>
-          <a href="#compare-examples-{{../../article.id}}-{{index}}">{{{showDiff source.title compare.title}}}</a>
-        </li>
-      {{/if}}
-
-      {{#if typeIns}}
-        <li{{#if_eq index compare=0}} class="active"{{/if_eq}}>
-          <a href="#compare-examples-{{../../article.id}}-{{index}}"><ins>{{{source.title}}}</ins></a>
-        </li>
-      {{/if}}
-
-      {{#if typeDel}}
-        <li{{#if_eq index compare=0}} class="active"{{/if_eq}}>
-          <a href="#compare-examples-{{../../article.id}}-{{index}}"><del>{{{compare.title}}}</del></a>
-        </li>
-      {{/if}}
-    {{/each_compare_title}}
-    </ul>
-
-    <div class="tab-content">
-    {{#each_compare_title article.examples compare.examples}}
-
-      {{#if typeSame}}
-        <div class="tab-pane{{#if_eq index compare=0}} active{{/if_eq}}" id="compare-examples-{{../../article.id}}-{{index}}">
-          <pre data-type="{{source.type}}"><code class="language-{{source.type}}">{{{showDiff source.content compare.content}}}</code></pre>
-        </div>
-      {{/if}}
-
-      {{#if typeIns}}
-        <div class="tab-pane{{#if_eq index compare=0}} active{{/if_eq}}" id="compare-examples-{{../../article.id}}-{{index}}">
-          <pre data-type="{{source.type}}"><code class="language-{{source.type}}">{{{source.content}}}</code></pre>
-        </div>
-      {{/if}}
-
-      {{#if typeDel}}
-        <div class="tab-pane{{#if_eq index compare=0}} active{{/if_eq}}" id="compare-examples-{{../../article.id}}-{{index}}">
-          <pre data-type="{{compare.type}}"><code class="language-{{source.type}}">{{{compare.content}}}</code></pre>
-        </div>
-      {{/if}}
-
-    {{/each_compare_title}}
-    </div>
-
-    {{subTemplate "article-compare-param-block" source=article.parameter compare=compare.parameter _hasType=_hasTypeInParameterFields section="parameter"}}
-    {{subTemplate "article-compare-param-block" source=article.success compare=compare.success _hasType=_hasTypeInSuccessFields section="success"}}
-    {{subTemplate "article-compare-param-block" source=article.error compare=compare.error _col1="Name" _hasType=_hasTypeInErrorFields section="error"}}
-
-    {{subTemplate "article-sample-request" article=article id=id}}
-
-  </article>
-</script>
-
-<script id="template-article-compare-permission" type="text/x-handlebars-template">
-  <p>
-  {{__ "Permission:"}}
-  {{#each_compare_list_field article.permission compare.permission field="name"}}
-    {{#if source}}
-      {{#if typeSame}}
-        {{source.name}}
-        {{#if source.title}}
-          <button type="button" class="btn btn-info btn-xs" data-title="{{source.title}}" data-content="{{nl2br source.description}}" data-html="true" data-toggle="popover" data-placement="right" data-trigger="hover">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-          </button>
-          {{#unless _last}}, {{/unless}}
-        {{/if}}
-      {{/if}}
-
-      {{#if typeIns}}
-        <ins>{{source.name}}</ins>
-        {{#if source.title}}
-          <button type="button" class="btn btn-info btn-xs" data-title="{{source.title}}" data-content="{{nl2br source.description}}" data-html="true" data-toggle="popover" data-placement="right" data-trigger="hover">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-          </button>
-          {{#unless _last}}, {{/unless}}
-        {{/if}}
-      {{/if}}
-
-      {{#if typeDel}}
-        <del>{{source.name}}</del>
-        {{#if source.title}}
-          <button type="button" class="btn btn-info btn-xs" data-title="{{source.title}}" data-content="{{nl2br source.description}}" data-html="true" data-toggle="popover" data-placement="right" data-trigger="hover">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-          </button>
-          {{#unless _last}}, {{/unless}}
-        {{/if}}
-      {{/if}}
-    {{else}}
-      {{#if typeSame}}
-        {{compare.name}}
-        {{#if compare.title}}
-          <button type="button" class="btn btn-info btn-xs" data-title="{{compare.title}}" data-content="{{nl2br compare.description}}" data-html="true" data-toggle="popover" data-placement="right" data-trigger="hover">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-          </button>
-          {{#unless _last}}, {{/unless}}
-        {{/if}}
-      {{/if}}
-
-      {{#if typeIns}}
-        <ins>{{compare.name}}</ins>
-        {{#if compare.title}}
-          <button type="button" class="btn btn-info btn-xs" data-title="{{compare.title}}" data-content="{{nl2br compare.description}}" data-html="true" data-toggle="popover" data-placement="right" data-trigger="hover">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-          </button>
-          {{#unless _last}}, {{/unless}}
-        {{/if}}
-      {{/if}}
-
-      {{#if typeDel}}
-        <del>{{compare.name}}</del>
-        {{#if compare.title}}
-          <button type="button" class="btn btn-info btn-xs" data-title="{{compare.title}}" data-content="{{nl2br compare.description}}" data-html="true" data-toggle="popover" data-placement="right" data-trigger="hover">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-          </button>
-          {{#unless _last}}, {{/unless}}
-        {{/if}}
-      {{/if}}
-    {{/if}}
-  {{/each_compare_list_field}}
-  </p>
-</script>
-
-<script id="template-article-compare-param-block" type="text/x-handlebars-template">
-  {{#if source}}
-    {{#each_compare_keys source.fields compare.fields}}
-      {{#if typeSame}}
-        <h2>{{__ source.key}}</h2>
-        <table>
-        <thead>
-          <tr>
-            <th style="width: 30%">{{#if ../_col1}}{{__ ../_col1}}{{else}}{{__ "Field"}}{{/if}}</th>
-            {{#if ../_hasType}}<th style="width: 10%">{{__ "Type"}}</th>{{/if}}
-            <th style="width: {{#if ../_hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
-          </tr>
-        </thead>
-        {{subTemplate "article-compare-param-block-body" source=source.value compare=compare.value _hasType=../_hasType}}
-        </table>
-      {{/if}}
-
-      {{#if typeIns}}
-        <h2><ins>{{__ source.key}}</ins></h2>
-        <table class="ins">
-        <thead>
-          <tr>
-            <th style="width: 30%">{{#if ../_col1}}{{__ ../_col1}}{{else}}{{__ "Field"}}{{/if}}</th>
-            {{#if ../_hasType}}<th style="width: 10%">{{__ "Type"}}</th>{{/if}}
-            <th style="width: {{#if ../_hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
-          </tr>
-        </thead>
-        {{subTemplate "article-compare-param-block-body" source=source.value compare=source.value _hasType=../_hasType}}
-        </table>
-      {{/if}}
-
-      {{#if typeDel}}
-        <h2><del>{{__ compare.key}}</del></h2>
-        <table class="del">
-        <thead>
-          <tr>
-            <th style="width: 30%">{{#if ../_col1}}{{__ ../_col1}}{{else}}{{__ "Field"}}{{/if}}</th>
-            {{#if ../_hasType}}<th style="width: 10%">{{__ "Type"}}</th>{{/if}}
-            <th style="width: {{#if ../_hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
-          </tr>
-        </thead>
-        {{subTemplate "article-compare-param-block-body" source=compare.value compare=compare.value _hasType=../_hasType}}
-        </table>
-      {{/if}}
-    {{/each_compare_keys}}
-
-    {{#if source.examples}}
-    <ul class="nav nav-tabs nav-tabs-examples">
-    {{#each_compare_title source.examples compare.examples}}
-      {{#if typeSame}}
-        <li{{#if_eq index compare=0}} class="active"{{/if_eq}}>
-          <a href="#{{../../section}}-compare-examples-{{../../article.id}}-{{index}}">{{{showDiff source.title compare.title}}}</a>
-        </li>
-      {{/if}}
-
-      {{#if typeIns}}
-        <li{{#if_eq index compare=0}} class="active"{{/if_eq}}>
-          <a href="#{{../../section}}-compare-examples-{{../../article.id}}-{{index}}"><ins>{{{source.title}}}</ins></a>
-        </li>
-      {{/if}}
-
-      {{#if typeDel}}
-        <li{{#if_eq index compare=0}} class="active"{{/if_eq}}>
-          <a href="#{{../../section}}-compare-examples-{{../../article.id}}-{{index}}"><del>{{{compare.title}}}</del></a>
-        </li>
-      {{/if}}
-    {{/each_compare_title}}
-    </ul>
-
-    <div class="tab-content">
-    {{#each_compare_title source.examples compare.examples}}
-
-      {{#if typeSame}}
-        <div class="tab-pane{{#if_eq index compare=0}} active{{/if_eq}}" id="{{../../section}}-compare-examples-{{../../article.id}}-{{index}}">
-          <pre data-type="{{source.type}}"><code class="language-{{source.type}}">{{{showDiff source.content compare.content}}}</code></pre>
-        </div>
-      {{/if}}
-
-      {{#if typeIns}}
-        <div class="tab-pane{{#if_eq index compare=0}} active{{/if_eq}}" id="{{../../section}}-compare-examples-{{../../article.id}}-{{index}}">
-          <pre data-type="{{source.type}}"><code class="language-{{source.type}}">{{{source.content}}}</code></pre>
-        </div>
-      {{/if}}
-
-      {{#if typeDel}}
-        <div class="tab-pane{{#if_eq index compare=0}} active{{/if_eq}}" id="{{../../section}}-compare-examples-{{../../article.id}}-{{index}}">
-          <pre data-type="{{compare.type}}"><code class="language-{{source.type}}">{{{compare.content}}}</code></pre>
-        </div>
-      {{/if}}
-    {{/each_compare_title}}
-    </div>
-    {{/if}}
-  {{/if}}
-</script>
-
-<script id="template-article-compare-param-block-body" type="text/x-handlebars-template">
-  <tbody>
-    {{#each_compare_field source compare}}
-      {{#if typeSame}}
-        <tr>
-          <td class="code">
-            {{{splitFill source.field "." "&nbsp;&nbsp;"}}}
-            {{#if source.optional}}
-              {{#if compare.optional}} <span class="label label-optional">{{__ "optional"}}</span>
-              {{else}} <span class="label label-optional label-ins">{{__ "optional"}}</span>
-              {{/if}}
-            {{else}}
-              {{#if compare.optional}} <span class="label label-optional label-del">{{__ "optional"}}</span>{{/if}}
-            {{/if}}
-          </td>
-
-        {{#if source.type}}
-          {{#if compare.type}}
-          <td>{{{showDiff source.type compare.type}}}</td>
-          {{else}}
-          <td>{{{source.type}}}</td>
-          {{/if}}
-        {{else}}
-          {{#if compare.type}}
-          <td>{{{compare.type}}}</td>
-          {{else}}
-            {{#if ../../../../_hasType}}<td></td>{{/if}}
-          {{/if}}
-        {{/if}}
-          <td>
-            {{{showDiff source.description compare.description "nl2br"}}}
-            {{#if source.defaultValue}}<p class="default-value">{{__ "Default value:"}} <code>{{{showDiff source.defaultValue compare.defaultValue}}}</code><p>{{/if}}
-          </td>
-        </tr>
-      {{/if}}
-
-      {{#if typeIns}}
-        <tr class="ins">
-          <td class="code">
-            {{{splitFill source.field "." "&nbsp;&nbsp;"}}}
-            {{#if source.optional}} <span class="label label-optional label-ins">{{__ "optional"}}</span>{{/if}}
-          </td>
-
-        {{#if source.type}}
-          <td>{{{source.type}}}</td>
-        {{else}}
-          {{{typRowTd}}}
-        {{/if}}
-
-          <td>
-            {{{nl2br source.description}}}
-            {{#if source.defaultValue}}<p class="default-value">{{__ "Default value:"}} <code>{{{source.defaultValue}}}</code><p>{{/if}}
-          </td>
-        </tr>
-      {{/if}}
-
-      {{#if typeDel}}
-        <tr class="del">
-          <td class="code">
-            {{{splitFill compare.field "." "&nbsp;&nbsp;"}}}
-            {{#if compare.optional}} <span class="label label-optional label-del">{{__ "optional"}}</span>{{/if}}
-          </td>
-
-        {{#if compare.type}}
-          <td>{{{compare.type}}}</td>
-        {{else}}
-          {{{typRowTd}}}
-        {{/if}}
-
-          <td>
-            {{{nl2br compare.description}}}
-            {{#if compare.defaultValue}}<p class="default-value">{{__ "Default value:"}} <code>{{{compare.defaultValue}}}</code><p>{{/if}}
-          </td>
-        </tr>
-      {{/if}}
-
-    {{/each_compare_field}}
-  </tbody>
-</script>
-
-<div class="container-fluid">
-  <div class="row">
-    <div id="sidenav" class="span2"></div>
-    <div id="content">
-      <div id="project"></div>
-      <div id="header"></div>
-      <div id="sections"></div>
-      <div id="footer"></div>
-      <div id="generator"></div>
-    </div>
-  </div>
-</div>
-
-<div id="loader">
-  <div class="spinner">
-    <div class="spinner-container container1">
-      <div class="circle1"></div><div class="circle2"></div><div class="circle3"></div><div class="circle4"></div>
-    </div>
-    <div class="spinner-container container2">
-      <div class="circle1"></div><div class="circle2"></div><div class="circle3"></div><div class="circle4"></div>
-    </div>
-    <div class="spinner-container container3">
-      <div class="circle1"></div><div class="circle2"></div><div class="circle3"></div><div class="circle4"></div>
-    </div>
-    <p>Loading...</p>
-  </div>
-</div>
-
-<script data-main="main.js" src="vendor/require.min.js"></script>
-</body>
-</html>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#md:reactium-graphql-plugin"><span>Reactium <wbr/>GraphQL <wbr/>Plugin</span></a><ul><li><a href="#md:about-this-repository"><span>About this <wbr/>Repository</span></a></li><li><a href="#md:install"><span>Install</span></a></li><li><a href="#md:usage"><span>Usage</span></a></li><li><a href="#md:reactium-specific-hooks"><span>Reactium <wbr/>Specific <wbr/>Hooks</span></a></li><li><a href="#md:configuration"><span>Configuration</span></a></li><li><a href="#md:using-this-demo-graphql-server"><span>Using this demo <wbr/>GraphQL server</span></a></li><li><a href="#md:starting-the-ui"><span>Starting the UI</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="assets/icons.svg#icon-1"></use></svg><span>Reactium-GraphQL-Plugin</span></a><ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="."><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>

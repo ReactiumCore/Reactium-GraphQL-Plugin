@@ -9,16 +9,17 @@
     "heroku-prebuild": "npx reactium install",
     "static": "npm-run-all build:* && gulp static",
     "local": "gulp local",
-    "clean": "gulp clean"
+    "clean": "gulp clean",
+    "graphql": "cd GraphQLServer; denon start",
+    "typedoc": "npx typedoc --tsconfig reactium_modules/@reactium/graphql/tsconfig.json --out docs --readme ./readme.md  reactium_modules/@reactium/graphql"
   },
   "keywords": [
     "react",
-    "redux",
     "framework",
     "javascript",
     "ddd"
   ],
-  "author": "Cam Tullos <cam@tullos.ninja> (http://cam.tullos.ninja) and John Dillick <john@dillick.us>",
+  "author": "John Dillick <john@dillick.us>",
   "license": "MIT",
   "engines": {
     "node": "18.x",

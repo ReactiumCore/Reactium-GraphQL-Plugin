@@ -16,7 +16,7 @@ import {
 } from '@apollo/client';
 
 /**
- * @description useSyncGQLQuery is a hook that wraps the useLazyQuery hook from Apollo Client, and adds state management and event handling.
+ * @description useSyncQuery is a hook that wraps the useLazyQuery hook from Apollo Client, and adds state management and event handling.
  * @param {DocumentNode | TypedDocumentNode<TData, TVariables>} query The GraphQL query document.
  * @param {LazyQueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>} options Options to be passed to the useLazyQuery hook.
  * @param {'set' | 'change' | 'loaded' | 'refreshed' | string} [updateEvent='set'] The event name that triggers a rerender
@@ -24,7 +24,7 @@ import {
  * @see {@link [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery)} for more information on the useLazyQuery hook from which this hook is derived.
  * @see {@link [ReactiumSyncState](https://reactiumcore.github.io/reactium-sdk-core/classes/ReactiumSyncState.html)} to understand the underlying synchronized state object.
  * @example
- * import { useSyncGQLQuery } from '@reactium/graphql';
+ * import { useSyncQuery } from '@reactium/graphql';
  * import { gql } from '@apollo/client';
  *
  * const MY_QUERY = gql`
@@ -37,7 +37,7 @@ import {
  * `;
  *
  * const MyComponent = () => {
- *   const state = useSyncGQLQuery(MY_QUERY, { variables: { id: '123' } });
+ *   const state = useSyncQuery(MY_QUERY, { variables: { id: '123' } });
  *   const { data, loading, error } = state.get();
  *
  *  if (loading) return <div>Loading...</div>;
@@ -50,7 +50,7 @@ import {
  *    </div>
  * );
  */
-export const useSyncGQLQuery = <
+export const useSyncQuery = <
     TData = any,
     TVariables extends OperationVariables = OperationVariables,
 >(
