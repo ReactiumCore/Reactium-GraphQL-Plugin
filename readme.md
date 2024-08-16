@@ -1,6 +1,6 @@
 # Reactium GraphQL Plugin
 
-Provides an Apollo GraphQL client on Reactium.GraphQL singleton in Reactium project.
+Provides an Apollo GraphQL client to your Reactium project.
 
 ## About this Repository
 This repository is a mono-style repo (for publishing the @reactium/graphql Reactium module to the Reactium registry), but it's also a Reactium project itself, complete with an example deno GraphQL server and a Reactium example front-end that uses the @reactium/graphql module.
@@ -14,6 +14,10 @@ To install this module in your own Reactium project:
 ```sh
 npx reactium install @reactium/graphql
 ```
+
+See [Configuration](#configuration) for environment variables to setup the plugin to work with your GraphQL server.
+
+> By default looks for http://localhost:4000/graphql Change the `GRAPHQL_URL` environment variable if needed.
 
 ## Usage
 

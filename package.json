@@ -11,7 +11,7 @@
     "local": "gulp local",
     "clean": "gulp clean",
     "graphql": "cd GraphQLServer; denon start",
-    "typedoc": "npx typedoc --tsconfig reactium_modules/@reactium/graphql/tsconfig.json --out docs --readme ./readme.md  reactium_modules/@reactium/graphql"
+    "typedoc": "npx typedoc --tsconfig reactium_modules/@reactium/graphql/tsconfig.json --readme ./readme.md"
   },
   "keywords": [
     "react",

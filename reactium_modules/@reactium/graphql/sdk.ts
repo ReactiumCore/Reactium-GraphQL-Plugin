@@ -16,13 +16,13 @@ import {
 } from '@apollo/client';
 
 /**
- * @description useSyncQuery is a hook that wraps the useLazyQuery hook from Apollo Client, and adds state management and event handling.
+ * useSyncQuery is a hook that wraps the query hook from Apollo Client, and adds state management and event handling.
  * @param {DocumentNode | TypedDocumentNode<TData, TVariables>} query The GraphQL query document.
  * @param {LazyQueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>} options Options to be passed to the useLazyQuery hook.
  * @param {'set' | 'change' | 'loaded' | 'refreshed' | string} [updateEvent='set'] The event name that triggers a rerender
  * @return {ReactiumSyncState<QueryResult<TData,TVariables>>} The sync state object.
- * @see {@link [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery)} for more information on the useLazyQuery hook from which this hook is derived.
- * @see {@link [ReactiumSyncState](https://reactiumcore.github.io/reactium-sdk-core/classes/ReactiumSyncState.html)} to understand the underlying synchronized state object.
+ * @see [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) for more information on the useLazyQuery hook from which this hook is derived.
+ * @see [ReactiumSyncState](https://reactiumcore.github.io/reactium-sdk-core/classes/ReactiumSyncState.html) to understand the underlying synchronized state object.
  * @example
  * import { useSyncQuery } from '@reactium/graphql';
  * import { gql } from '@apollo/client';
