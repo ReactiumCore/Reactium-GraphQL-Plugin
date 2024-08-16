@@ -59,7 +59,7 @@ export const UsersList = () => {
 
 ## Reactium Specific Hooks
 
-When this module is installed in a Reactium project, it exposes it's own React hooks in the @reactium/graphql workspace.
+When this module is installed in a Reactium project, it exposes it's own React hooks in the @reactium/graphql workspace. See the [TypeDoc for this module](https://reactiumcore.github.io/Reactium-GraphQL-Plugin/).
 
 * **useSyncQuery**: Wraps the Apollo GraphQL query hook, but makes it into a [ReactiumSyncState object](https://reactiumcore.github.io/reactium-sdk-core/classes/ReactiumSyncState.html) for easier memory state management. For those used to the Reactium improved [useSyncState hook](https://reactiumcore.github.io/reactium-sdk-core/functions/useSyncState.html) for improved component state management, with imperative state updates, as well as EventTarget extensibility and observability.
 
