@@ -3,3 +3,4 @@ package.json
 src/assets/vendor
 docs
 *.md
+GraphQLServer
