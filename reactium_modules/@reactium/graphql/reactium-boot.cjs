@@ -9,13 +9,13 @@ const playgroundEnabled =
     process.env.NODE_ENV === 'development';
 const proxyEnabled = process.env.GRAPHQL_PROXY_ENABLED !== 'off';
 const graphqlAPI =
-    process.env.GRAPHQL_URL || `http://127.0.0.1:4000${graphqlProxyPath}`;
+    process.env.GRAPHQL_URL || `http://localhost:4000${graphqlProxyPath}`;
 const logLevel = process.env.DEBUG === 'on' ? 'debug' : 'error';
 
 BOOT('GraphQL Module for Reactium...');
 BOOT('GraphQL API:', graphqlAPI);
 DEBUG(
-    'Set GraphQL API URL with GRAPHQL_URL environment variable (defaults to http://127.0.0.1:4000/graphql)',
+    'Set GraphQL API URL with GRAPHQL_URL environment variable (defaults to http://localhost:4000/graphql)',
 );
 
 BOOT('GraphQL Proxy:', proxyEnabled ? graphqlProxyPath : 'disabled');

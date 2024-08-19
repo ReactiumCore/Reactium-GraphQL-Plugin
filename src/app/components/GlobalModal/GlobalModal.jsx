@@ -1,8 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
-import {
-    cxFactory,
-    useRegisterSyncHandle,
-} from '@atomic-reactor/reactium-core/sdk';
+import { cxFactory, useSyncHandle } from '@atomic-reactor/reactium-core/sdk';
 import cn from 'classnames';
 
 /**
@@ -11,18 +8,7 @@ import cn from 'classnames';
  * -----------------------------------------------------------------------------
  */
 export const GlobalModal = () => {
-    const handle = useRegisterSyncHandle('Modal', {
-        show: false,
-        cx: cxFactory('modal'),
-        className: '',
-        dialogProps: {},
-        header: 'Modal Header',
-        headerProps: { closeButton: true },
-        body: 'Modal Body',
-        bodyProps: {},
-        footer: 'Modal Footer',
-        footerProps: {},
-    });
+    const handle = useSyncHandle('Modal');
 
     handle.extend('open', () => handle.set('show', true));
     handle.extend('close', () => handle.set('show', false));

@@ -4,9 +4,25 @@
  * -----------------------------------------------------------------------------
  */
 (async () => {
-    const { Hook, Enums, Component, Handle, ReactiumSyncState, cxFactory } =
-        await import('@atomic-reactor/reactium-core/sdk');
-
+    const { Component, ReactiumSyncState, Handle, cxFactory } = await import(
+        '@atomic-reactor/reactium-core/sdk'
+    );
     const { GlobalModal } = await import('./GlobalModal');
+
     Component.register('GlobalModal', GlobalModal);
+
+    Handle.register('Modal', {
+        current: new ReactiumSyncState({
+            show: false,
+            cx: cxFactory('modal'),
+            className: '',
+            dialogProps: {},
+            header: 'Modal Header',
+            headerProps: { closeButton: true },
+            body: 'Modal Body',
+            bodyProps: {},
+            footer: 'Modal Footer',
+            footerProps: {},
+        }),
+    });
 })();
