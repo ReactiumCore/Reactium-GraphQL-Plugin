@@ -4,7 +4,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useHookComponent, useHandle } from 'reactium-core/sdk';
 import { useSyncQuery } from '@reactium/graphql';
-import * as DeleteUser from './User/DeleteUser/DeleteUser';
+import { DeleteUser } from './User/DeleteUser/DeleteUser';
+import { EditUser } from './User/EditUser/EditUser';
 
 export const Dashboard = () => {
     const PostList = useHookComponent('PostList');
@@ -16,6 +17,7 @@ export const Dashboard = () => {
                     id
                     name
                     email
+                    age
                 }
 
                 posts {
@@ -33,37 +35,67 @@ export const Dashboard = () => {
     );
 
     const Modal = useHandle('Modal');
-    const confirmDelete = (user) => {
-        Modal.set(
-            {
-                header: <DeleteUser.Header user={user} />,
-                body: <DeleteUser.Body user={user} />,
-                footer: (
-                    <DeleteUser.Footer
-                        user={user}
-                        onCancel={() => Modal.close()}
-                        onSuccess={async () => {
-                            const client = handle.get('client');
-                            await client.mutate({
-                                mutation: gql`
-                                    mutation DeleteUser($id: ID!) {
-                                        deleteUser(id: $id) {
-                                            success
-                                            message
-                                        }
-                                    }
-                                `,
-                                variables: { id: user.id },
-                            });
+    const editUser = async (user = {}) => {
+        const saveUser = async (userObj) => {
+            console.log('saveUser', userObj);
+            const client = handle.get('client');
+            await client.mutate({
+                mutation: gql`
+                    mutation SaveUser($userObj: SaveUserInput) {
+                        saveUser(input: $userObj) {
+                            id
+                            name
+                            email
+                        }
+                    }
+                `,
+                variables: { userObj },
+            });
 
-                            Modal.close();
-                            await handle.refresh();
-                        }}
-                    />
-                ),
-            },
-            false,
-        );
+            Modal.close();
+            await handle.refresh();
+        };
+
+        Modal.set({
+            content: (
+                <EditUser
+                    user={{ ...user }}
+                    onCancel={() => Modal.close()}
+                    onSuccess={saveUser}
+                />
+            ),
+        });
+        Modal.open();
+    };
+
+    const confirmDeleteUser = (user) => {
+        const deleteUser = async () => {
+            const client = handle.get('client');
+            await client.mutate({
+                mutation: gql`
+                    mutation DeleteUser($id: ID!) {
+                        deleteUser(id: $id) {
+                            success
+                            message
+                        }
+                    }
+                `,
+                variables: { id: user.id },
+            });
+
+            Modal.close();
+            await handle.refresh();
+        };
+
+        Modal.set({
+            content: (
+                <DeleteUser
+                    user={user}
+                    onCancel={() => Modal.close()}
+                    onSuccess={deleteUser}
+                />
+            ),
+        });
         Modal.open();
     };
 
@@ -76,7 +108,9 @@ export const Dashboard = () => {
                         loading={handle.get('loading', false)}
                         error={handle.get('error')}
                         users={handle.get('data.users', [])}
-                        onDelete={confirmDelete}
+                        onNew={editUser}
+                        onEdit={editUser}
+                        onDelete={confirmDeleteUser}
                     />
                 </Col>
             </Row>

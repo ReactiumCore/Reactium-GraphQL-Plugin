@@ -11,7 +11,12 @@ export const GlobalModal = () => {
     const handle = useSyncHandle('Modal');
 
     handle.extend('open', () => handle.set('show', true));
-    handle.extend('close', () => handle.set('show', false));
+
+    handle.extend('close', () => {
+        handle.set('show', false);
+        handle.set('content', null);
+    });
+
     handle.extend('makeSuccess', (onSuccess) => (...props) => {
         onSuccess(...props);
         handle.set('show', false);
@@ -30,15 +35,7 @@ export const GlobalModal = () => {
                     onHide={handle.close}
                     onEscapeKeyDown={handle.close}
                     {...handle.get('dialogProps', {})}>
-                    <Modal.Header {...handle.get('headerProps', {})}>
-                        {handle.get('header', null)}
-                    </Modal.Header>
-                    <Modal.Body {...handle.get('bodyProps', {})}>
-                        {handle.get('body', null)}
-                    </Modal.Body>
-                    <Modal.Footer {...handle.get('footerProps', {})}>
-                        {handle.get('footer', null)}
-                    </Modal.Footer>
+                    {handle.get('content', null)}
                 </Modal>
             </section>
         )

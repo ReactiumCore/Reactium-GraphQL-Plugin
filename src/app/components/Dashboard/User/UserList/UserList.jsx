@@ -12,9 +12,9 @@ export const UserList = ({
     loading = true,
     error,
     users = [],
-    onNew = console.log,
-    onEdit = console.log,
-    onDelete = console.log,
+    onNew = () => console.log('New User Dialog'),
+    onEdit = (user) => console.log('Edit User Dialog', user),
+    onDelete = (user) => console.log('Delete User Dialog', user),
 }) => {
     return (
         <Accordion defaultActiveKey='0' className='users'>
@@ -24,7 +24,7 @@ export const UserList = ({
                     {error && <Alert variant='danger'>{error.message}</Alert>}
                     <Button
                         title='New User'
-                        onClick={onNew}
+                        onClick={() => onNew()}
                         className='new-user mb-2'>
                         New User
                     </Button>

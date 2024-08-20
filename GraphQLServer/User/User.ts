@@ -1,7 +1,7 @@
 import { db } from '../Data/Db.ts';
 import { ObjectId } from 'mongo.ts';
 
-type UserRecord = {
+export type UserRecord = {
     _id?: ObjectId;
     name: string;
     email: string;
@@ -26,15 +26,16 @@ export class User {
     async save() {
         let rec;
         if (this.id) {
-            rec = await User.collection.updateOne(
-                { _id: this.id },
+            await User.collection.updateOne(
+                { _id: new ObjectId(this.id) },
                 { $set: this },
             );
+            rec = {};
         } else {
             rec = await User.collection.insertOne(this);
         }
 
-        const saved = new User({ ...this, ...rec });
+        const saved = new User({ ...this, ...rec, _id: this.id });
         Object.assign(this, saved);
         return saved;
     }

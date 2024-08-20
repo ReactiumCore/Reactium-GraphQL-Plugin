@@ -17,12 +17,7 @@
             cx: cxFactory('modal'),
             className: '',
             dialogProps: {},
-            header: 'Modal Header',
-            headerProps: { closeButton: true },
-            body: 'Modal Body',
-            bodyProps: {},
-            footer: 'Modal Footer',
-            footerProps: {},
+            content: null,
         }),
     });
 })();

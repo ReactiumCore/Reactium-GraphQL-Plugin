@@ -1,6 +1,7 @@
 import { Application, Router } from 'oak.ts';
 import { applyGraphQL, gql, GQLError } from 'oak_graphql.ts';
-import { User } from './User/User.ts';
+import { ObjectId } from 'mongo.ts';
+import { User, type UserRecord } from './User/User.ts';
 import { Post } from './Post/Post.ts';
 import _ from 'underscore.ts';
 
@@ -20,7 +21,8 @@ app.use(async (ctx, next) => {
 });
 
 const typeDefs = gql`
-    input CreateUserInput {
+    input SaveUserInput {
+        id: ID
         name: String!
         email: String!
         age: Int
@@ -47,7 +49,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        testInput(input: CreateUserInput!): User
+        testInput(input: SaveUserInput!): User
         me: User!
         user(id: ID!): User
         users: [User]!
@@ -58,7 +60,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        createUser(name: String!, email: String!, age: Int): User!
+        saveUser(input: SaveUserInput): User!
         deleteUser(id: ID!): SuccessOrError!
         createPost(title: String!, body: String!, published: Boolean!): Post!
     }
@@ -129,14 +131,29 @@ const resolvers = {
         },
     },
     Mutation: {
-        createUser: async (
+        saveUser: async (
             parent: any,
-            { name, email, age }: { name: string; email: string; age?: number },
+            {
+                input,
+            }: {
+                input: {
+                    id?: ObjectId;
+                    name: string;
+                    email: string;
+                    age?: number;
+                };
+            },
             context: any,
             info: any,
         ) => {
-            const user = new User({ name, email, age });
+            const draft: UserRecord = { ...(input as UserRecord) };
+            if (input.id) {
+                draft._id = input.id;
+            }
+
+            const user = new User(draft);
             await user.save();
+            console.log({ user });
             return user;
         },
         deleteUser: async (
