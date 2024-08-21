@@ -1,4 +1,12 @@
 .posts {
     margin-top: 1rem;
     margin-bottom: 1rem;
+
+    &-actions {
+        display: flex;
+        justify-content: flex-start;
+        & > * {
+            margin-right: 0.5rem;
+        }
+    }
 }
