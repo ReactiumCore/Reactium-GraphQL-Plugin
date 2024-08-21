@@ -4,6 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 import Placeholder from 'react-bootstrap/Placeholder';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
@@ -35,6 +36,7 @@ export const PostList = ({
                                 <th>Title</th>
                                 <th>Body</th>
                                 <th>Author</th>
+                                <th>Published</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -71,6 +73,14 @@ export const PostList = ({
                                                     ? author.name
                                                     : 'Unknown'}
                                             </td>
+                                            <td>
+                                                <div className='posts-published'>
+                                                    <Form.Check
+                                                        readOnly={true}
+                                                        checked={published}
+                                                    />
+                                                </div>
+                                            </td>
                                             <td className='posts-actions'>
                                                 <Button
                                                     title='Edit Post'
@@ -90,10 +100,10 @@ export const PostList = ({
                                                 <Button
                                                     title='Delete Post'
                                                     onClick={() =>
-                                                        console.log(
-                                                            'Delete Post',
+                                                        onDelete({
                                                             id,
-                                                        )
+                                                            title,
+                                                        })
                                                     }>
                                                     <FontAwesomeIcon
                                                         icon={faTrash}

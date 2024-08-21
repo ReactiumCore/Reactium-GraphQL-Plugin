@@ -2,6 +2,10 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
 
+    &-published {
+        margin-left: 2rem;
+    }
+
     &-actions {
         display: flex;
         justify-content: flex-start;

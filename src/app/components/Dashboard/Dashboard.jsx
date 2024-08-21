@@ -7,6 +7,7 @@ import { useSyncQuery } from '@reactium/graphql';
 import { DeleteUser } from './User/DeleteUser/DeleteUser';
 import { EditUser } from './User/EditUser/EditUser';
 import { EditPost } from './Post/EditPost/EditPost';
+import { DeletePost } from './Post/DeletePost/DeletePost';
 
 const getUserActions = (handle, Modal) => {
     const user = {
@@ -115,6 +116,36 @@ const getPostActions = (handle, Modal) => {
             });
             Modal.open();
         },
+        onDelete: async (post) => {
+            const deletePost = async () => {
+                const client = handle.get('client');
+                await client.mutate({
+                    mutation: gql`
+                        mutation DeletePost($id: ID!) {
+                            deletePost(id: $id) {
+                                success
+                                message
+                            }
+                        }
+                    `,
+                    variables: { id: post.id },
+                });
+
+                Modal.close();
+                await handle.refresh();
+            };
+
+            Modal.set({
+                content: (
+                    <DeletePost
+                        post={post}
+                        onCancel={() => Modal.close()}
+                        onSuccess={deletePost}
+                    />
+                ),
+            });
+            Modal.open();
+        },
     };
 
     post.onNew = post.onEdit;
@@ -150,6 +181,7 @@ export const Dashboard = () => {
                         id
                         name
                     }
+                    published
                 }
 
                 add(nums: $nums)

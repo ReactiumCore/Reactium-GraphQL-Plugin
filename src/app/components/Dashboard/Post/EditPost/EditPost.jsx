@@ -57,6 +57,21 @@ const Body = ({ state }) => {
                         ))}
                     </Form.Control>
                 </Form.Group>
+                <Form.Group controlId='edit.published'>
+                    <Form.Label>Published Status</Form.Label>
+                    <Form.Check
+                        type='switch'
+                        label={
+                            state.get('post.published', false)
+                                ? 'Published'
+                                : 'Draft'
+                        }
+                        checked={state.get('post.published', false)}
+                        onChange={(e) =>
+                            state.set('post.published', e.target.checked)
+                        }
+                    />
+                </Form.Group>
             </Form>
         </Modal.Body>
     );
