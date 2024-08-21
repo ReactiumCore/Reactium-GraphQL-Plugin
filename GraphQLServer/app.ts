@@ -133,12 +133,10 @@ const resolvers = {
         },
 
         posts: async (parent: any, { query }: any, context: any, info: any) => {
-            console.log({ query });
             if (query) {
                 return Post.find({ title: { $regex: query, $options: 'i' } });
             }
             const posts = await Post.find();
-            console.log({ posts });
             return posts;
         },
     },
@@ -166,7 +164,6 @@ const resolvers = {
 
             const user = new User(draft);
             await user.save();
-            console.log({ user });
             return user;
         },
         deleteUser: async (
@@ -206,7 +203,6 @@ const resolvers = {
 
             const post = new Post(draft);
             await post.save();
-            console.log({ post });
             return post;
         },
 
