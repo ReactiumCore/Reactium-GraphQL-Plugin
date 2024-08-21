@@ -35,7 +35,8 @@ export class User {
             rec = await User.collection.insertOne(this);
         }
 
-        const saved = new User({ ...this, ...rec, _id: this.id });
+        if (this.id) rec._id = this.id;
+        const saved = new User({ ...this, ...rec });
         Object.assign(this, saved);
         return saved;
     }

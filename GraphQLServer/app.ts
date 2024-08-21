@@ -1,9 +1,9 @@
 import { Application, Router } from 'oak.ts';
 import { applyGraphQL, gql, GQLError } from 'oak_graphql.ts';
 import { ObjectId } from 'mongo.ts';
-import { User, type UserRecord } from './User/User.ts';
-import { Post } from './Post/Post.ts';
 import _ from 'underscore.ts';
+import { User, type UserRecord } from './User/User.ts';
+import { Post, type PostRecord } from './Post/Post.ts';
 
 const app = new Application();
 
@@ -26,6 +26,14 @@ const typeDefs = gql`
         name: String!
         email: String!
         age: Int
+    }
+
+    input SavePostInput {
+        id: ID
+        authorId: ID
+        title: String!
+        body: String!
+        published: Boolean!
     }
 
     type User {
@@ -60,9 +68,11 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        saveUser(input: SaveUserInput): User!
+        saveUser(input: SaveUserInput!): User!
         deleteUser(id: ID!): SuccessOrError!
-        createPost(title: String!, body: String!, published: Boolean!): Post!
+
+        savePost(input: SavePostInput!): Post!
+        deletePost(id: ID!): SuccessOrError!
     }
 `;
 
@@ -104,7 +114,7 @@ const resolvers = {
 
         users: async (parent: any, args: any, context: any, info: any) => {
             // await new Promise((resolve) => setTimeout(resolve, 5000));
-            const users = User.find();
+            const users = await User.find();
             return users;
         },
 
@@ -114,7 +124,6 @@ const resolvers = {
             context: any,
             info: any,
         ) => {
-            console.log({ id });
             return {
                 id: 123,
                 title: 'Hello World',
@@ -124,12 +133,16 @@ const resolvers = {
         },
 
         posts: async (parent: any, { query }: any, context: any, info: any) => {
+            console.log({ query });
             if (query) {
                 return Post.find({ title: { $regex: query, $options: 'i' } });
             }
-            return Post.find();
+            const posts = await Post.find();
+            console.log({ posts });
+            return posts;
         },
     },
+
     Mutation: {
         saveUser: async (
             parent: any,
@@ -163,29 +176,52 @@ const resolvers = {
             info: any,
         ) => {
             try {
-                const user = await User.delete(id);
+                await User.delete(id);
                 return { success: true };
             } catch (e) {
                 return { success: false, message: e.message };
             }
         },
-        createPost: async (
+
+        savePost: async (
             parent: any,
             {
-                title,
-                body,
-                published,
+                input,
             }: {
-                title: string;
-                body: string;
-                published: boolean;
+                input: {
+                    id?: ObjectId;
+                    authorId?: ObjectId;
+                    title: string;
+                    body: string;
+                    published: boolean;
+                };
             },
             context: any,
             info: any,
         ) => {
-            const post = new Post({ title, body, published });
+            const draft: PostRecord = { ...(input as PostRecord) };
+            if (input.id) {
+                draft._id = input.id;
+            }
+
+            const post = new Post(draft);
             await post.save();
+            console.log({ post });
             return post;
+        },
+
+        deletePost: async (
+            parent: any,
+            { id }: { id: string },
+            context: any,
+            info: any,
+        ) => {
+            try {
+                await Post.delete(id);
+                return { success: true };
+            } catch (e) {
+                return { success: false, message: e.message };
+            }
         },
     },
 };
